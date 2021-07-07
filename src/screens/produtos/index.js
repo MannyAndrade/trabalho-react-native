@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { View, Button, Text, TextInput, ScrollView} from 'react-native';
-
+import { adicionarProdutos} from '../src/data/produto_db'
 
 
 
@@ -8,6 +8,13 @@ function ProdutoCadastro() {
     const [nomeProduto, setNomeProduto] = useState();
       const [categoria, setCategoria] = useState();
       const [preco, setPreco] = useState();
+
+    function salvarProduto(){
+        //adicionar validacao de dados nulos
+        adicionarProdutos(nome, descricao, preco)
+    }
+
+
   return (
     <ScrollView>
       <TextInput
@@ -28,8 +35,8 @@ function ProdutoCadastro() {
         }}></TextInput>
       <Button
         title="Cadastrar produto"
-        onPress={() => {
-          setNomeProduto();
+        onPress={() => { //salvarProduto
+          setNomeProduto(salvarProduto);
         }}
       />
       <View>
