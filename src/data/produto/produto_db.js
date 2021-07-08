@@ -1,4 +1,6 @@
+import { Alert } from "react-native";
 import Realm from  "realm";
+
 
 class ProdutoSchema extends Realm.Object{}
     ProdutoSchema.schema = {
@@ -26,7 +28,7 @@ class ProdutoSchema extends Realm.Object{}
     let adicionarProdutos = (nomeProduto, descricaoProduto, precoProduto) => {
         
 
-        //console.log(nomeProduto, descricaoProduto, precoProduto) -para testar no metro
+        console.log(nomeProduto, descricaoProduto, precoProduto) //-para testar no metro
         
         const ultimoId = realm_produto.objects('Produto').sorted('produto_id', true)[0];
         const maiorId = ultimoId == null ? 1  : ultimoId.produto_id;
@@ -43,7 +45,22 @@ class ProdutoSchema extends Realm.Object{}
         });
     }
 
+    let atualizarProduto =(nomeProduto, descricaoProduto, precoProduto) => {
+        realm_produto.write =() =>{
+            const prod = realm_produto._updateSchema('Produto', {
+                produto_id: 
+                produto_nome: nomeProduto,
+                produto_descricao: descricaoProduto,
+                produto_preco: precoProduto,
+                })
+            Alert.alert('Produto atualizado com sucesso');
+
+        }
+
+    }
+
     export {
         listarProdutos, 
-        adicionarProdutos
+        adicionarProdutos,
+        atualizarProduto
     }
